@@ -1,0 +1,23 @@
+{
+  "name": "DMS_Product_Backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arund21/DMS_Product_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arund21/DMS_Product_Backend/issues"
+  },
+  "homepage": "https://github.com/arund21/DMS_Product_Backend#readme",
+  "dependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
