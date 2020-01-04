@@ -18,10 +18,10 @@ var websitemodel = require('./model/Website');
 
 
 
-
 var authController = require('./controllers/AuthenticationController');
 var userController = require('./controllers/UsersController');
 var adminController = require('./controllers/AdminController');
+var boostController = require('./controllers/BoostController');
 var textController = require('./controllers/TextController');
 var { body, validationResult, check } = require('express-validator');
 
@@ -158,13 +158,33 @@ application.put('/v1/blockuser/:userid', authController.tokenVerify, adminContro
 })
 //block user
 application.put('/v1/unblockuser/:userid', authController.tokenVerify, adminController.unblockUser, function(req, res) {
-
     res.status(200);
     res.send({
         "message": "User unBlocked"
 
     })
 })
+
+
+//Boost API
+//add campaign
+application.post('/v1/campaign', bodyParser.urlencoded({extended:true}), authController.tokenVerify, boostController.addMyCampaign,
+    function(req, res) {
+        res.status(200);
+        res.send({
+            "message": "Campaign added"
+
+        })
+    })
+
+
+//search all campaign of a user
+application.get('/v1/campaign', authController.tokenVerify, boostController.searchMyCampaign, function(req, res) {
+    res.status(200);
+})
+
+
+
 
 //Text API
 //add text

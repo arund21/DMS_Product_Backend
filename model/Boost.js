@@ -28,12 +28,24 @@ const Boost = db.sequelize.define('Boost', {
         type: db.Sequelize.STRING,
         allowNull: false
     },
+    rate: {
+        type: db.Sequelize.STRING,
+        allowNull: false
+    },
+    gender: {
+        type: db.Sequelize.STRING,
+        allowNull: false
+    },
     area: {
         type: db.Sequelize.STRING,
         allowNull: false
     },
     interest: {
         type: db.Sequelize.STRING
+    },
+    status: {
+        type: db.Sequelize.STRING,
+        allowNull: false
     },
     stopped_dollar: {
         type: db.Sequelize.INTEGER

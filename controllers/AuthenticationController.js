@@ -176,12 +176,13 @@ function tokenVerify(req, res, next) {
         let token = req.headers.authorization.slice(7, req.headers.authorization.length)
 
         jwt.verify(token, 'universalDMSDesingedByArunDasAtCoventry', function(err, decoded) {
-            // console.log(decoded);
+            
             if (err) {
                 next({ status: 403, message: err.message })
                 // console.log(err);
             } else {
                 req.user = decoded;
+                // console.log(decoded); 
                 next();
             }
         })
