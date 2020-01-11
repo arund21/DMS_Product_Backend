@@ -19,9 +19,12 @@ const Pages = db.sequelize.define('Pages', {
   	type: db.Sequelize.STRING,
   allowNull:false
   },
+  purpose: {
+    type: db.Sequelize.STRING,
+  allowNull:false
+  },
   created_by: {
-    type: db.Sequelize.INTEGER,
-    allowNull: false
+    type: db.Sequelize.INTEGER
   },
   users_id: {
     type: db.Sequelize.INTEGER

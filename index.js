@@ -22,6 +22,7 @@ var authController = require('./controllers/AuthenticationController');
 var userController = require('./controllers/UsersController');
 var adminController = require('./controllers/AdminController');
 var boostController = require('./controllers/BoostController');
+var pageController = require('./controllers/PageController');
 var textController = require('./controllers/TextController');
 var { body, validationResult, check } = require('express-validator');
 
@@ -184,6 +185,23 @@ application.get('/v1/campaign', authController.tokenVerify, boostController.sear
 })
 
 
+//Pages API
+//request for new page
+application.post('/v1/requestpage', bodyParser.urlencoded({extended:true}), authController.tokenVerify, pageController.createMyPage,
+    function(req, res) {
+        res.status(200);
+        res.send({
+            "message": "Request Success"
+
+        })
+    })
+
+
+
+//Search all pages of a user
+application.get('/v1/findPages', authController.tokenVerify, pageController.findPages, function(req, res) {
+    res.status(200);
+})
 
 
 //Text API
