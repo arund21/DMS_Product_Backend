@@ -1,5 +1,6 @@
 var boostmodel = require('../model/Boost');
 var feedbackmodel = require('../model/FeedBack');
+var stopboostrequestmodel = require('../model/Stop_request');
 
 
 function addMyCampaign(req, res, next) {
@@ -39,6 +40,25 @@ function searchMyCampaign(req, res) {
 
         })
 }
+
+function stopBoostRequest(req, res, next) {
+    // return console.log(req.body);
+    stopboostrequestmodel.Stop_request.create({
+            boost_id: req.body.boost_id,
+            reason: req.body.reason,
+            status: "pending",
+            requested_by: req.user.user_id
+        })
+        .then(function(result) {
+            next();
+        })
+        .catch(function(err) {
+            console.log(err.message);
+            next({ "status": 500, "message": err.message })
+        })
+}
+
+
 
 // function searchMyText(req,res){
 
@@ -145,6 +165,7 @@ feedbackmodel.FeedBack.findAll({
 module.exports = {
     addMyCampaign,
     searchMyCampaign,
+    stopBoostRequest,
     findText,
     editText,
     deleteNote,

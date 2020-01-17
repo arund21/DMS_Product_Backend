@@ -12,6 +12,7 @@ var boostmodel = require('./model/Boost');
 var documentmodel = require('./model/Document');
 var pagesmodel = require('./model/Pages');
 var paymentmodel = require('./model/Payment');
+var paymentrequestmodel = require('./model/PaymentRequest');
 var ratemodel = require('./model/Rate');
 var stoprequestmodel = require('./model/Stop_request');
 var websitemodel = require('./model/Website');
@@ -24,6 +25,9 @@ var adminController = require('./controllers/AdminController');
 var boostController = require('./controllers/BoostController');
 var pageController = require('./controllers/PageController');
 var textController = require('./controllers/TextController');
+var paymentController = require('./controllers/PaymentController');
+
+
 var { body, validationResult, check } = require('express-validator');
 
 //upload image for adnroid
@@ -178,6 +182,16 @@ application.post('/v1/campaign', bodyParser.urlencoded({extended:true}), authCon
         })
     })
 
+//stop campaign
+application.post('/v1/stopboostrequest', bodyParser.urlencoded({extended:true}), authController.tokenVerify, boostController.stopBoostRequest,
+    function(req, res) {
+        res.status(200);
+        res.send({
+            "message": "Request sent"
+
+        })
+    })
+
 
 //search all campaign of a user
 application.get('/v1/campaign', authController.tokenVerify, boostController.searchMyCampaign, function(req, res) {
@@ -197,11 +211,29 @@ application.post('/v1/requestpage', bodyParser.urlencoded({extended:true}), auth
     })
 
 
-
 //Search all pages of a user
 application.get('/v1/findPages', authController.tokenVerify, pageController.findPages, function(req, res) {
     res.status(200);
 })
+
+
+//Payment api
+//request for payment
+application.post('/v1/requestpayment', bodyParser.urlencoded({extended:true}), authController.tokenVerify, paymentController.createMyRequest,
+    function(req, res) {
+        res.status(200);
+        res.send({
+            "message": "Request Success"
+
+        })
+    })
+
+//retrieve users payments
+application.get('/v1/findPayments', authController.tokenVerify, paymentController.findMyPayments, function(req, res) {
+    res.status(200);
+})
+
+
 
 
 //Text API
